@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form id="data" action="/quote" method="post">
+        <div class="form-group">
+            <input id="symbol" autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol company" type="text" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Get price</button>
+    </form>
+
+    <script>
+        document.getElementById("data").onsubmit = function () {
+
+            if (!document.getElementById("symbol").value){
+                alert("You must provide the symbol of the company!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+{% endblock %}

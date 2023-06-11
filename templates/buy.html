@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form id="data" action="/buy" method="post">
+        <div class="form-group">
+            <input id="symbol" autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol company" type="text" required>
+        </div>
+        <div class="form-group">
+            <input id="shares" autocomplete="off" autofocus class="form-control" name="shares" placeholder="Quantity of shares" type="text" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Buy shares</button>
+    </form>
+
+    <script>
+        document.getElementById("data").onsubmit = function () {
+
+            if (!document.getElementById("symbol").value){
+                alert("You must provide the symbol of the company!");
+                return false;
+            }
+            else if (!document.getElementById("shares").value) {
+                alert("You must provide the quantity of the shares!");
+                return false;
+            }
+           
+            return true;
+        }
+    </script>
+
+{% endblock %}

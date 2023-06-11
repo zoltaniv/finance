@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <h1>Sheet</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">№</th>
+                {% for headtable in inf %}
+
+                    <th scope="col">{{ headtable }}</th>
+
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for i in range(1, 2) %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    {% for j in inf %}
+
+                        <td>{{ inf[j] }}</td>
+
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

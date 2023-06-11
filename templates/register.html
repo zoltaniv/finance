@@ -1,0 +1,65 @@
+{% extends "layout.html" %} {% block title %} Register {% endblock %} {% block
+main %}
+<form id="data" action="/register" method="post">
+  <div class="form-group">
+    <input
+      id="username"
+      onchange="checkName()"
+      autocomplete="off"
+      autofocus
+      class="form-control"
+      name="username"
+      placeholder="Username"
+      type="text"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      id="password"
+      class="form-control"
+      name="password"
+      placeholder="Password"
+      type="text"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      id="confirmation"
+      class="form-control"
+      name="confirmation"
+      placeholder="Confirmation"
+      type="text"
+      required
+    />
+  </div>
+  <button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+<script>
+  function checkName() {
+    str = document.getElementById("username").value;
+    const xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onload = function () {
+    btext = JSON.parse(this.responseText);
+
+      if (btext["username"] == false) {
+        alert("This name is taken! Choose another name!");
+        document.getElementById("username").value = "";
+        document.getElementById("username").focus();
+        return false;
+      }
+      else {
+        alert("You can use this name!");
+        return true;
+      }
+    };
+
+    xmlhttp.open("GET", "/check?username=" + str);
+    xmlhttp.send();
+  }
+</script>
+
+{% endblock %}

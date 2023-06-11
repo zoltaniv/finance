@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portpholio
+{% endblock %}
+
+{% block main %}
+
+    <h1>Portpholio</h1>
+    <br>
+
+    <table class="table table-hover">
+        <!-- Create the header of the table -->
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Company</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">TOTAL</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for row in rows %}
+
+                <tr>
+
+                    {% for item in row %}
+
+                        <td>{{ row[item] }}</td>
+
+                    {% endfor %}
+
+                </tr>
+
+            {% endfor %}
+
+            <tr>
+                <td><b>CASH</b></td>
+                <td colspan="3"></td>
+                <td><b>{{ cash }}</b></td>
+            </tr>
+
+            <tr>
+                <td colspan="4"></td>
+                <td><b>{{ capital }}</b></td>
+            </tr>
+
+        </tbody>
+    </table>
+{% endblock %}
