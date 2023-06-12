@@ -1,7 +1,9 @@
 # finance
 # Web application based on Flask server
 
-This project is a website similar to an electronic exchange where a registered user has the opportunity to buy and sell shares of various companies.
+**C$50 Finance** is a web application that allows you to manage stock portfolios. This tool allows you to check actual current stock prices and investment portfolio values, as well as buy and sell (ok, "buy and sell") stocks by querying [IEX](https://www.iexexchange.io/products/market-data-connectivity) for stock prices.
+Indeed, IEX allows you to download stock quotes using its own API.
+
 ## Registration
 ![Screenshot of registration form](/static/screenshot/registration.png)
 Immediately after registration you get your own electronic account and 10000 USD in your own account
