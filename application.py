@@ -57,8 +57,8 @@ def index():
     user = db.execute("SELECT * FROM users WHERE id = :userid",
                       userid=session["user_id"])
 
-    cash = user[0]["cash"]
     username = user[0]["username"]
+    cash = user[0]["cash"]
     capital = cash
 
     # return apology("1")
@@ -137,7 +137,11 @@ def buy():
         return redirect("/")
 
     else:
-        return render_template("buy.html")
+        user = db.execute("SELECT * FROM users WHERE id = :userid",
+                      userid=session["user_id"])
+        username = user[0]["username"]
+        
+        return render_template("buy.html", username=username)
 
 
 @app.route("/check", methods=["GET"])
@@ -164,8 +168,11 @@ def history():
     """Show history of transactions"""
     rows = db.execute(
         "SELECT action, symbol, company, price, shares, dealprice, date FROM transactions WHERE id = :userid", userid=session["user_id"])
-
-    return render_template("history.html", rows=rows)
+    
+    user = db.execute("SELECT * FROM users WHERE id = :userid",
+                      userid=session["user_id"])
+    username = user[0]["username"]
+    return render_template("history.html", username=username, rows=rows)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -236,10 +243,16 @@ def quote():
             return apology("The symbol of company not exist", 400)
 
         # Pass the information to the quote.html and return the page
-        return render_template("quoted.html", inf=inf)
+        user = db.execute("SELECT * FROM users WHERE id = :userid",
+                      userid=session["user_id"])
+        username = user[0]["username"]
+        return render_template("quoted.html", username=username, inf=inf)
 
     else:
-        return render_template("quote.html")
+        user = db.execute("SELECT * FROM users WHERE id = :userid",
+                      userid=session["user_id"])
+        username = user[0]["username"]
+        return render_template("quote.html", username=username)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -368,8 +381,10 @@ def sell():
     else:
         rows = db.execute(
             "SELECT symbol FROM transactions WHERE id = :userid GROUP BY symbol", userid=session["user_id"])
-
-        return render_template("sell.html", rows=rows)
+        user = db.execute("SELECT * FROM users WHERE id = :userid",
+                      userid=session["user_id"])
+        username = user[0]["username"]
+        return render_template("sell.html", username=username, rows=rows)
 
 
 def errorhandler(e):
