@@ -46,13 +46,6 @@ def index():
     # Get all user's shares from transactions
     rows = db.execute(
         "SELECT symbol, company, SUM(shares) AS allshares, price, dealprice FROM transactions WHERE id = :userid GROUP BY symbol", userid=session["user_id"])
-    '''i = 0
-    for dic in rows:
-        if dic["allshares"] == 0:
-            rows.pop(i)
-            i += 1
-        else:
-            i += 1'''
 
     user = db.execute("SELECT * FROM users WHERE id = :userid",
                       userid=session["user_id"])
@@ -61,11 +54,12 @@ def index():
     cash = user[0]["cash"]
     capital = cash
 
-    # return apology("1")
     # Get fresh price of all shares
     for row in rows:
-        share = lookup(row["symbol"])
-        row["price"] = share["price"]
+        # Because the "https://api.iextrading.com" site does not work!!!
+        # share = lookup(row["symbol"])
+        # row["price"] = share["price"]
+        
         # Get the price of all shares
         row["dealprice"] = row["price"] * row["allshares"]
         # Get all the capital
